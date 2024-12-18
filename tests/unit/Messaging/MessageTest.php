@@ -13,7 +13,8 @@ class MessageTest extends TestCase {
     /** @var Message */
     protected $message;
 
-    public function setUp() {
+    public function setUp(): void
+    {
         $this->message = new Message;
     }
 
@@ -22,7 +23,7 @@ class MessageTest extends TestCase {
     }
 
     public function testNoFramesOpCode() {
-        $this->setExpectedException('UnderflowException');
+        $this->expectException('UnderflowException');
         $this->message->getOpCode();
     }
 
@@ -38,7 +39,7 @@ class MessageTest extends TestCase {
 
     public function testUnbufferedFragment() {
         $this->message->addFrame(new Frame('The quick brow', false));
-        $this->setExpectedException('UnderflowException');
+        $this->expectException('UnderflowException');
         $this->message->getPayload();
     }
 

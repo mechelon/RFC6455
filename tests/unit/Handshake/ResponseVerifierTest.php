@@ -14,7 +14,8 @@ class ResponseVerifierTest extends TestCase {
      */
     protected $_v;
 
-    public function setUp() {
+    public function setUp(): void
+    {
         $this->_v = new ResponseVerifier;
     }
 

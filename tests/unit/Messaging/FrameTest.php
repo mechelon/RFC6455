@@ -20,7 +20,8 @@ class FrameTest extends TestCase {
 
     protected $_packer;
 
-    public function setUp() {
+    public function setUp(): void
+    {
         $this->_frame = new Frame;
     }
 
@@ -87,7 +88,7 @@ class FrameTest extends TestCase {
      * @covers Ratchet\RFC6455\Messaging\Frame::getPayload
      */
     public function testUnderflowExceptionFromAllTheMethodsMimickingBuffering($method, $bin) {
-        $this->setExpectedException('\UnderflowException');
+        $this->expectException('\UnderflowException');
         if (!empty($bin)) {
             $this->_frame->addBuffer(static::encode($bin));
         }
@@ -192,7 +193,7 @@ class FrameTest extends TestCase {
         $ref = new \ReflectionClass($this->_frame);
         $cb  = $ref->getMethod('getFirstPayloadVal');
         $cb->setAccessible(true);
-        $this->setExpectedException('UnderflowException');
+        $this->expectException('UnderflowException');
         $cb->invoke($this->_frame);
     }
 
@@ -216,7 +217,7 @@ class FrameTest extends TestCase {
         $ref = new \ReflectionClass($this->_frame);
         $cb  = $ref->getMethod('getNumPayloadBits');
         $cb->setAccessible(true);
-        $this->setExpectedException('UnderflowException');
+        $this->expectException('UnderflowException');
         $cb->invoke($this->_frame);
     }
 
@@ -433,7 +434,7 @@ class FrameTest extends TestCase {
      * covers Ratchet\RFC6455\Messaging\Frame::maskPayload
      */
     public function testGivenMaskIsValid() {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $this->_frame->maskPayload('hello world');
     }
 
@@ -445,7 +446,7 @@ class FrameTest extends TestCase {
             $this->markTestSkipped("mbstring required for this test");
             return;
         }
-        $this->setExpectedException('OutOfBoundsException');
+        $this->expectException('OutOfBoundsException');
         $this->_frame->maskPayload('x✖');
     }
 

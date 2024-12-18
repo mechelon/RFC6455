@@ -281,10 +281,9 @@ class MessageBufferTest extends TestCase
         ];
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidMaxFramePayloadSizes() {
+        $this->expectException(\InvalidArgumentException::class);
+
         $messageBuffer = new MessageBuffer(
             new CloseFrameChecker(),
             function (Message $message) {},
@@ -296,10 +295,9 @@ class MessageBufferTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidMaxMessagePayloadSizes() {
+        $this->expectException(\InvalidArgumentException::class);
+
         $messageBuffer = new MessageBuffer(
             new CloseFrameChecker(),
             function (Message $message) {},
